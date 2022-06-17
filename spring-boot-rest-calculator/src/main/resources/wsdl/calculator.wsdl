@@ -1,0 +1,52 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.soap.com/calculator/api/calculations" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.soap.com/calculator/api/calculations" targetNamespace="http://www.soap.com/calculator/api/calculations">
+<wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://www.soap.com/calculator/api/calculations">
+<xsd:element name="CalculationRequest">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="operation" type="xsd:string"/>
+<xsd:element name="input1" type="xsd:long"/>
+<xsd:element name="input2" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="CalculationResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="result" type="xsd:long"/>
+<xsd:element name="operationMessage" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="CalculationRequest">
+<wsdl:part element="tns:CalculationRequest" name="CalculationRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="CalculationResponse">
+<wsdl:part element="tns:CalculationResponse" name="CalculationResponse"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="CalculationIndicator">
+<wsdl:operation name="Calculation">
+<wsdl:input message="tns:CalculationRequest" name="CalculationRequest"> </wsdl:input>
+<wsdl:output message="tns:CalculationResponse" name="CalculationResponse"> </wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="CalculationIndicatorSoap11" type="tns:CalculationIndicator">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="Calculation">
+<soap:operation soapAction=""/>
+<wsdl:input name="CalculationRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="CalculationResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="CalculationIndicatorService">
+<wsdl:port binding="tns:CalculationIndicatorSoap11" name="CalculationIndicatorSoap11">
+<soap:address location="http://localhost:8080/Calculator"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
